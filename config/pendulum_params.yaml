@@ -15,7 +15,7 @@ pendulum_parameters:
 
     frequency: 50                   # hz
 
-    water_speed: 1.5                # m/s
+    water_speed: 0.0               # m/s
 
     water_density: 1000.0           # kg/m3
 
