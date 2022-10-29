@@ -49,7 +49,7 @@ public:
       50ms, std::bind(&MinimalPublisher::timer_callback, this));
   }
   double theta_dot0 = 0;
-  double theta0 = 1.5;
+  double theta0 = 3;
   // double theta0 = get_parameter("initial_angled").as_double();
 
   // double theta_dot0 = get_parameter("initial_angular_speed").as_double();
