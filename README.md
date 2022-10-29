@@ -4,7 +4,7 @@ A ros2 package for dynamic modeling of a simple pendulum underwater with rviz vi
 # Installation #
 Before you install the package, make sure that you have the joint state publisher and xacro packeges installed on your ros2 system by typing the following:
 ```bash
-sudo apt install ros-<ros2-distro>-joint-state-publisher-gui
+sudo apt install ros-<ros2-distro>-joint-state-publisher
 ```
 ```bash
 sudo apt install ros-<ros2-distro>-xacro
