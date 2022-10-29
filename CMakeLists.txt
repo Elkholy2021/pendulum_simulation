@@ -17,10 +17,23 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
+
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
-
+add_executable(pendulum src/pendulum.cpp)
+ament_target_dependencies(pendulum rclcpp std_msgs geometry_msgs sensor_msgs)
+install(TARGETS
+  pendulum
+  DESTINATION lib/${PROJECT_NAME})
+install(
+  DIRECTORY  launch  rviz src urdf 
+  DESTINATION share/${PROJECT_NAME}
+)
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
