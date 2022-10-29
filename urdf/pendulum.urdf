@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
 
+
 <robot name="pendulum">
 
     <joint name="pendulum_joint" type="continuous">
@@ -31,16 +32,19 @@
                   izz="0.001" />
       </inertial>
       <visual>
-        <origin xyz="0.5 0 0" rpy="0 0 0" />
+        <origin xyz="2 0 0" rpy="0 0 0" />
         <geometry>
-          <sphere radius="0.03"/>
+          <sphere radius="0.08"/>
         </geometry>
-        <material name="Red" />
+          <material name="Orange">
+    <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
+  </material>
+
       </visual>
       <collision>
         <origin xyz="0 0 0.25" rpy="0 0 0" />
         <geometry>
-          <sphere radius="0.03"/>
+          <sphere radius="0.08"/>
         </geometry>
       </collision>
     </link>
@@ -60,16 +64,19 @@
                   izz="0.001" />
       </inertial>
       <visual>
-        <origin xyz="0.25 0 0" rpy="0 1.5708 0" />
+        <origin xyz="1 0 0" rpy="0 1.5708 0" />
         <geometry>
-          <cylinder radius="0.01" length="0.5"/>
+          <cylinder radius="0.02" length="2"/>
         </geometry>
-        <material name="Red" />
+          <material name="Dark blue">
+    <color rgba="${0/255} ${0/255} ${140/255} 1.0"/>
+  </material>
+
       </visual>
       <collision>
         <origin xyz="0 0 0.125" rpy="0 0 0" />
         <geometry>
-          <cylinder radius="0.01" length="0.25"/>
+          <cylinder radius="0.1" length="2"/>
         </geometry>
       </collision>
     </link>
