@@ -38,7 +38,6 @@ public:
     declare_parameter("initial_angular_speed", 0.0);
     declare_parameter("length", 3.0);
     declare_parameter("gravity", 9.8);
-    declare_parameter("frequency", 100);
     declare_parameter("water_speed", 0.0);
     declare_parameter("water_density", 1000.0);
     declare_parameter("pendulum_radius", 0.05);
@@ -48,50 +47,67 @@ public:
     timer_ = this->create_wall_timer(
       50ms, std::bind(&MinimalPublisher::timer_callback, this));
   }
-  double theta_dot0 = 0;
-  double theta0 = 3;
-  // double theta0 = get_parameter("initial_angled").as_double();
 
-  // double theta_dot0 = get_parameter("initial_angular_speed").as_double();
+  bool first_time = true;
+  auto load_initial_conditions() {
+    double theta0 = get_parameter("initial_angle").as_double();
+    double theta_dot0 = get_parameter("initial_angular_speed").as_double();
+    struct initial_conditions {
+        double theta0;
+        double theta_dot0;
+
+    };    
+
+    return initial_conditions {theta0, theta_dot0};
+
+  }
 
   auto pendulum( double theta, double theta_dot) {
-    // double m = 3.0;
-      // auto m = this->get_parameter('m').as_double();
 
-    auto m = get_parameter("mass").as_double();
+    double m = get_parameter("mass").as_double();
     double L = get_parameter("length").as_double();
     double g = get_parameter("gravity").as_double();
-    int freq = get_parameter("frequency").as_int();
     double Vc = get_parameter("water_speed").as_double();
     double pw = get_parameter("water_density").as_double();
     double r = get_parameter("pendulum_radius").as_double();
     double Kd = get_parameter("drag_coefficient").as_double();
-
-    // double L = 2.0;
-    // double g = 9.8;
     double theta_ddot;
     double tau_g;
     double tau_d;
     double tau_b;
     // double tau_f;
-    double dt = freq/1000.0;
-    // double Vc = 1.5;
-    // double pw = 1000;
-    // double r = 0.08;
+    double dt = 0.05;
     double V = (4/3)*M_PI*pow(r,3);
+    double Ap = M_PI*pow(r,2);
     // double uf = 0.2;
+    
+    if (first_time){
+    cout<<"---------------------------------------"<<endl;
+    cout<<"pendulum mass         |          "<< m << endl;
+    cout<<"---------------------------------------"<<endl;
+    cout<<"pendulum length       |          "<< L << endl;
+    cout<<"---------------------------------------"<<endl;
+    cout<<"pendulum radius       |          "<< r << endl;
+    cout<<"---------------------------------------"<<endl;
+    cout<<"water speed           |          "<< Vc << endl;
+    cout<<"---------------------------------------"<<endl;
+    cout<<"drag coeficient       |          "<< Kd << endl;
+    cout<<"---------------------------------------"<<endl;
+    first_time = false;
+    }
     if (theta <= M_PI_2 && theta >= -M_PI_2 ){
       Vc = Vc;
     }
     else {
       Vc = 0;
     }
-    // double Kd = 1;
  
     tau_g = m*g*L*sin(theta);   //gravity
  
    
-    tau_d = Kd*abs(L*theta_dot-Vc)*(L*theta_dot-Vc)*L;  //drag
+    // tau_d = Kd*abs(L*theta_dot-Vc)*(L*theta_dot-Vc)*L;  //drag
+    tau_d = 0.5*pw*Ap*Kd*abs(L*theta_dot-Vc)*(L*theta_dot-Vc)*L;  //drag
+
     tau_b = -pw * V * g*L*sin(theta);     //bouyancy
     // tau_f = - uf *(m*g - pw * V * g) * L;     //friction
 
@@ -105,12 +121,8 @@ public:
         double theta;
         double theta_dot;
         double theta_ddot;
-
     };    
-
     return states {theta, theta_dot, theta_ddot};
-
-
     }
 
 
@@ -119,29 +131,33 @@ private:
   {
 
     auto message = sensor_msgs::msg::JointState();
+    double theta0;
+    double theta_dot0;
+    message.header.stamp = rclcpp::Node::now	()	;
+    if(first_time){
+      auto initial_conditions = load_initial_conditions() ;
+      theta0 = initial_conditions.theta0;
+      theta_dot0 = initial_conditions.theta_dot0;
+      cout<<"---------------------------------------"<<endl;
+      cout<<"initial angle         |          "<< theta0 << endl;
+      cout<<"---------------------------------------"<<endl;
+      cout<<"initial angular speed |          "<< theta_dot0 << endl;
 
-    message.header.stamp = rclcpp::Node::now	(		)	;
-
+    }
 
     auto states_result = pendulum(theta0,theta_dot0) ;
     theta0 = states_result.theta;
     theta_dot0 = states_result.theta_dot;
-    cout << "  = "<< endl;
+    // cout << "  = "<< endl;
 
-    cout << "Theta_ddot = "<<states_result.theta_ddot<< endl;
-    cout << "Theta_dot = "<<states_result.theta_dot<< endl;
-    cout << "Theta = "<<states_result.theta<< endl;
-    cout << "  = "<< endl;
+    // cout << "Theta_ddot = "<<states_result.theta_ddot<< endl;
+    // cout << "Theta_dot = "<<states_result.theta_dot<< endl;
+    // cout << "Theta = "<<states_result.theta<< endl;
+    // cout << "  = "<< endl;
 
     message.name = {"pendulum_joint"};
     message.position = {states_result.theta};
-    // message.position={1};
 
-    
-    // i = i+0.1;
-    // message.name = {"pendulum_joint"};
-    // message.position = {0.5+i};
-    // cout << 55<< endl;
 
     publisher_->publish(message);
   }

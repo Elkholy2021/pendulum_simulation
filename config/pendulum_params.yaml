@@ -1,11 +1,10 @@
-# if a namespace is specified
-# ns_name: 
-# node name
+
+## PLEASE WRITE VALUES WITH DECIMAL POINT >>  2.0 NOT 2 ####
 pendulum_parameters: 
   ros__parameters:
     mass: 3.0                       # kg
 
-    initial_angle: 1.5              # rad
+    initial_angle: -3.0            # rad
 
     initial_angular_speed: 0.0      # rad/s
 
@@ -13,9 +12,7 @@ pendulum_parameters:
 
     gravity: 9.8                    # m/s2
 
-    frequency: 50                   # hz
-
-    water_speed: 0.0               # m/s
+    water_speed: 3.0               # m/s
 
     water_density: 1000.0           # kg/m3
 
