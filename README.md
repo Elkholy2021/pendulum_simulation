@@ -22,9 +22,9 @@ To modify the simulation parameters, kindly open this file to modifiy them:
 
 
 # Starting the simulation #
-To start the simulation, kindly navigate to your ros2 workspace:
+To start the simulation, kindly navigate to package directory:
 ```bash
-~/<YOUR ROS2 WORKSPACE>
+~/<YOUR ROS2 WORKSPACE>/src/pendulum_simulation
 ```
 And then run the bash script ``` start_simulation.sh``` using this command:
 ```bash
