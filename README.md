@@ -1,4 +1,4 @@
-# Dynamic modeling of a simple pendulum underrwater
+# Dynamic modeling of a simple pendulum underwater
 A ros2 package for dynamic modeling of a simple pendulum underwater with rviz visualization
 
 # Installation #
