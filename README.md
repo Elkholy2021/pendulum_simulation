@@ -27,6 +27,7 @@ To modify the simulation parameters, kindly open this file to modifiy them:
 ```bash
 ~/<YOUR ROS2 WORKSPACE>/src/pendulum_simulation/config/pendulum_params.yaml
 ```
+**Note:** make sure to write the parameter values with a decimal point >> e.g. 2.0 not 2
 
 
 # Starting the simulation #
