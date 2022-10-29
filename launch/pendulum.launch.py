@@ -4,6 +4,8 @@
 # https://automaticaddison.com
 
 import os
+from ament_index_python.packages import get_package_share_directory
+
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.conditions import IfCondition, UnlessCondition
@@ -21,6 +23,12 @@ def generate_launch_description():
 
   # Set the path to the URDF file
   default_urdf_model_path = os.path.join(pkg_share, 'urdf/pendulum.urdf')
+
+  config = os.path.join(
+          get_package_share_directory('pendulum_simulation'),
+          'config',
+          'pendulum_params.yaml'
+          )
 
   ########### YOU DO NOT NEED TO CHANGE ANYTHING BELOW THIS LINE ##############  
   # Launch configuration variables specific to simulation
@@ -66,7 +74,9 @@ def generate_launch_description():
   start_joint_state_publisher_cmd = Node(
     package='pendulum_simulation',
   executable='pendulum',
-  name='pendulum')
+  name='pendulum_parameters',
+  parameters=[os.path.join(get_package_share_directory('pendulum_simulation'),'config', 'pendulum_params.yaml')],
+  output='screen')
 
 
   # A GUI to manipulate the joint state values

@@ -27,11 +27,12 @@ find_package(sensor_msgs REQUIRED)
 # find_package(<dependency> REQUIRED)
 add_executable(pendulum src/pendulum.cpp)
 ament_target_dependencies(pendulum rclcpp std_msgs geometry_msgs sensor_msgs)
+
 install(TARGETS
   pendulum
   DESTINATION lib/${PROJECT_NAME})
 install(
-  DIRECTORY  launch  rviz src urdf 
+  DIRECTORY  launch  rviz src urdf config
   DESTINATION share/${PROJECT_NAME}
 )
 if(BUILD_TESTING)

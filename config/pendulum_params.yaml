@@ -1,0 +1,26 @@
+# if a namespace is specified
+# ns_name: 
+# node name
+pendulum_parameters: 
+  ros__parameters:
+    mass: 3.0                       # kg
+
+    initial_angle: 1.5              # rad
+
+    initial_angular_speed: 0.0      # rad/s
+
+    length: 2.0                     # m
+
+    gravity: 9.8                    # m/s2
+
+    frequency: 50                   # hz
+
+    water_speed: 1.5                # m/s
+
+    water_density: 1000.0           # kg/m3
+
+    pendulum_radius: 0.08           # m
+
+    drag_coefficient: 1.0     
+  
+
