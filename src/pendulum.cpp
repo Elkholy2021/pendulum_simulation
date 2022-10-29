@@ -135,7 +135,10 @@ public:
 private:
   void topic_callback(const geometry_msgs::msg::Vector3::SharedPtr msg) const
     {
-      cout << "X: "<< endl;
+      cout << "X: "<< msg->x << endl;
+      cout << "Y: "<< msg->y << endl;
+      cout << "Z: "<< msg->z << endl;
+
     }
   void timer_callback()
   {

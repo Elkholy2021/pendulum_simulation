@@ -27,10 +27,16 @@ find_package(sensor_msgs REQUIRED)
 # find_package(<dependency> REQUIRED)
 add_executable(pendulum src/pendulum.cpp)
 ament_target_dependencies(pendulum rclcpp std_msgs geometry_msgs sensor_msgs)
+add_executable(water_current_pub src/water_current_pub.cpp)
+ament_target_dependencies(water_current_pub rclcpp std_msgs geometry_msgs sensor_msgs)
 
 install(TARGETS
   pendulum
   DESTINATION lib/${PROJECT_NAME})
+  install(TARGETS
+  water_current_pub
+  DESTINATION lib/${PROJECT_NAME})
+
 install(
   DIRECTORY  launch  rviz src urdf config
   DESTINATION share/${PROJECT_NAME}
