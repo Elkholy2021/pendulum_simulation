@@ -10,30 +10,30 @@ sudo apt install ros-<ros2-distro>-joint-state-publisher
 sudo apt install ros-<ros2-distro>-xacro
 ```
 
-After that, navigate to your ros2 workspace folder and then to the src folder so that you will be in this directroy
+After that, navigate to your ros2 workspace folder and then to the src folder by running this command:
 
 ```bash
-~/<YOUR ROS2 WORKSPACE>/src
+cd ~/<YOUR ROS2 WORKSPACE>/src
 ```
 
-Run this command:
+Then, run this command:
 
 ```bash
 git clone https://github.com/Elkholy2021/Dynamic-modeling-of-a-simple-pendulum-undrerwater.git
 ```
 
 # Configuration #
-To modify the simulation parameters, kindly open this file to modifiy them:
+To modify the simulation parameters, kindly open the yaml file in config folder to modify them by running this command:
 ```bash
-~/<YOUR ROS2 WORKSPACE>/src/pendulum_simulation/config/pendulum_params.yaml
+gedit ~/<YOUR ROS2 WORKSPACE>/src/pendulum_simulation/config/pendulum_params.yaml
 ```
 **Note:** make sure to write the parameter values with a decimal point >> e.g. 2.0 not 2
 
 
 # Starting the simulation #
-To start the simulation, kindly navigate to package directory:
+To start the simulation, kindly navigate to package directory by running this command:
 ```bash
-~/<YOUR ROS2 WORKSPACE>/src/pendulum_simulation
+cd ~/<YOUR ROS2 WORKSPACE>/src/pendulum_simulation
 ```
 And then run the bash script ``` start_simulation.sh``` using this command:
 ```bash
