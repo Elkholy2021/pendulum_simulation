@@ -18,8 +18,11 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
+#include "geometry_msgs/msg/vector3.hpp"
+
 #include "sensor_msgs/msg/joint_state.hpp"
 #include <cmath>
+using std::placeholders::_1;
 
 // #include "geometry_msgs/msg/PoseStamped.h"
 using namespace std::chrono_literals;
@@ -44,6 +47,9 @@ public:
     declare_parameter("drag_coefficient", 1.0);
 
     publisher_ = this->create_publisher<sensor_msgs::msg::JointState>("joint_states", 10);
+    subscriber_ = this->create_subscription<geometry_msgs::msg::Vector3>(
+      "water_current", 10, std::bind(&MinimalPublisher::topic_callback, this, _1));
+
     timer_ = this->create_wall_timer(
       50ms, std::bind(&MinimalPublisher::timer_callback, this));
   }
@@ -127,6 +133,10 @@ public:
 
 
 private:
+  void topic_callback(const geometry_msgs::msg::Vector3::SharedPtr msg) const
+    {
+      cout << "X: "<< endl;
+    }
   void timer_callback()
   {
 
@@ -163,6 +173,8 @@ private:
   }
   rclcpp::TimerBase::SharedPtr timer_;
   rclcpp::Publisher<sensor_msgs::msg::JointState>::SharedPtr publisher_;
+  rclcpp::Subscription<geometry_msgs::msg::Vector3>::SharedPtr subscriber_;
+
   size_t count_;
 
 
