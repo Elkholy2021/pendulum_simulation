@@ -59,4 +59,8 @@ You can also change the water current vector directrly from the terminal without
 ```bash
 ros2 run pendulum_simulation water_current_pub --ros-args -p "x:= 4.1" -p "y:=0.0" -p "z:=-2.1"
 ```
+Also if you want to add some disturbances to the water current you can add the ros-arg ''' dist ''' which is integer greater than or equal to zero where zero is no disturbances and high number means high fluctions. You can simply run this command as an example:
+```bash
+ros2 run pendulum_simulation water_current_pub --ros-args -p "x:= 4.1" -p "y:=0.0" -p "z:=-2.1" -p "dist:=15"
+```
 If you did not provide the arguments, the node will publish the default values
