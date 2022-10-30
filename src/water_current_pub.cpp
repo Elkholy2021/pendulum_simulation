@@ -17,6 +17,10 @@ class MinimalPublisher : public rclcpp::Node
     MinimalPublisher()
     : Node("water_current_pub"), count_(0)
     {
+          declare_parameter("x", 3.0);
+          declare_parameter("y", 2.0);
+          declare_parameter("z", 0.0);
+
       publisher_ = this->create_publisher<geometry_msgs::msg::Vector3>("water_current", 10);
       timer_ = this->create_wall_timer(
       10ms, std::bind(&MinimalPublisher::timer_callback, this));
@@ -26,9 +30,13 @@ class MinimalPublisher : public rclcpp::Node
     void timer_callback()
     {
       auto message = geometry_msgs::msg::Vector3();
-      message.x = -5;
-      message.y = 1.0;
-      message.z = 3;
+      double Vx = get_parameter("x").as_double();
+      double Vy = get_parameter("y").as_double();
+      double Vz = get_parameter("z").as_double();
+
+      message.x = Vx;
+      message.y = Vy;
+      message.z = Vz;
       publisher_->publish(message);
     }
     rclcpp::TimerBase::SharedPtr timer_;
