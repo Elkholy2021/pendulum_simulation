@@ -73,4 +73,4 @@ If you did not run the node ``` water_current_pub``` or  the node got inturpted 
 ## References ##
 - Varghese Mathai, Laura A. W. M. Loeffen, Timothy T. K. Chan, and Sander Wildeman. Dynamics of heavy and buoyant underwater pendulums. Journal of Fluid Mechanics, 862:348–363, 2019. doi:10.1017/jfm.2018.867.
 - https://automaticaddison.com/how-to-load-a-urdf-file-into-rviz-ros-2/
-- 
+
