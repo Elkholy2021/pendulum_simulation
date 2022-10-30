@@ -5,17 +5,17 @@ A ros2 package for dynamic modeling of a simple pendulum fully immersed underwat
 
 ![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/pendulum.gif)
 
-# Forces diagram #
+## Forces diagram ##
 ![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/forces.png)
-# Dynamic modeling #
+## Dynamic modeling ##
 ![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/modeling.PNG)
-# ros2 program archeticutre #
+## ros2 program archeticutre ##
 ![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/architecture.png)
 
 
 
 
-# Installation #
+## Installation ##
 Before you install the package, make sure that you have the joint state publisher and xacro packeges installed on your ros2 system by typing the following:
 ```bash
 sudo apt install ros-<ros2-distro>-joint-state-publisher
@@ -36,7 +36,7 @@ Then, run this command:
 git clone https://github.com/Elkholy2021/Dynamic-modeling-of-a-simple-pendulum-undrerwater.git
 ```
 
-# Static configuration #
+## Static configuration ##
 To modify the simulation parameters like mass, length, water current, drag, etc .. , kindly open the yaml file in config folder to modify them by running this command:
 ```bash
 gedit ~/<YOUR ROS2 WORKSPACE>/src/pendulum_simulation/config/pendulum_params.yaml
@@ -44,7 +44,7 @@ gedit ~/<YOUR ROS2 WORKSPACE>/src/pendulum_simulation/config/pendulum_params.yam
 **Note:** make sure to write the parameter values with a decimal point >> e.g. 2.0 not 2
 
 
-# Starting the simulation #
+## Starting the simulation ##
 To start the simulation, kindly navigate to package directory by running this command:
 ```bash
 cd ~/<YOUR ROS2 WORKSPACE>/src/pendulum_simulation
@@ -54,7 +54,7 @@ And then run the bash script ``` start_simulation.sh``` using this command:
 ./start_simulation.sh
 ```
 
-# Configuration on the fly #
+## Configuration on the fly ##
 You can also change the water current vector directrly from the terminal without building the package everytime by running the ``` water_current_pub``` and parsing the water current vector components as ros arguments by typing this command as an example:
 ```bash
 ros2 run pendulum_simulation water_current_pub --ros-args -p "x:= 4.1" -p "y:=0.0" -p "z:=-2.1"
