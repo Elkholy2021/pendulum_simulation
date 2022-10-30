@@ -9,6 +9,8 @@ A ros2 package for dynamic modeling of a simple pendulum fully immersed underwat
 ![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/forces.png)
 ## Dynamic modeling ##
 ![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/modeling.PNG)
+For more details about the modeling, kindly see [this report](https://github.com/Elkholy2021/pendulum_simulation/blob/main/modeling_details.pdf).
+
 ## ros2 program archeticutre ##
 ![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/architecture.png)
 
@@ -66,3 +68,9 @@ ros2 run pendulum_simulation water_current_pub --ros-args -p "x:= 4.1" -p "y:=0.
 If you did not provide the arguments, the node will publish the default values
 
 If you did not run the node ``` water_current_pub``` or  the node got inturpted while running, the simulation parameters will be loaded from the yaml file. 
+
+
+## References ##
+- Varghese Mathai, Laura A. W. M. Loeffen, Timothy T. K. Chan, and Sander Wildeman. Dynamics of heavy and buoyant underwater pendulums. Journal of Fluid Mechanics, 862:348–363, 2019. doi:10.1017/jfm.2018.867.
+- https://automaticaddison.com/how-to-load-a-urdf-file-into-rviz-ros-2/
+- 
