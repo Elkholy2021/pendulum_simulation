@@ -12,7 +12,9 @@ pendulum_parameters:
 
     gravity: 9.8                    # m/s2
 
-    water_speed: -3.0               # m/s
+    water_current_x: 0.0            # m/s
+    water_current_y: 0.0            # m/s
+    water_current_z: 0.0            # m/s
 
     water_density: 1000.0           # kg/m3
 

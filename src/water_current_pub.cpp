@@ -19,16 +19,16 @@ class MinimalPublisher : public rclcpp::Node
     {
       publisher_ = this->create_publisher<geometry_msgs::msg::Vector3>("water_current", 10);
       timer_ = this->create_wall_timer(
-      50ms, std::bind(&MinimalPublisher::timer_callback, this));
+      10ms, std::bind(&MinimalPublisher::timer_callback, this));
     }
 
   private:
     void timer_callback()
     {
       auto message = geometry_msgs::msg::Vector3();
-      message.x = 2.5;
+      message.x = -5;
       message.y = 1.0;
-      message.z = 0.5;
+      message.z = 3;
       publisher_->publish(message);
     }
     rclcpp::TimerBase::SharedPtr timer_;
