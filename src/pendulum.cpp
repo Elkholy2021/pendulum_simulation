@@ -95,7 +95,7 @@ public:
     {
       Vc_mag = sqrt(pow(Vc_x,2)+pow(Vc_z,2));
       beta = atan2 (Vc_z,Vc_x); 
-      Vc = Vc_mag * cos(beta) * cos(theta_now);
+      Vc = Vc_x*cos(theta_now) + Vc_z*sin(theta_now);
       struct water_current_result {
         double Vc_mag;
         double beta;
@@ -177,13 +177,6 @@ public:
     cout<<"---------------------------------------"<<endl;
     first_time = false;
     }
-    if (theta <= M_PI_2 && theta >= -M_PI_2 ){
-      Vc = Vc;
-    }
-    else {
-      Vc = 0;
-    }
- 
     tau_g = m*g*L*sin(theta);   //gravity
  
    
@@ -232,13 +225,6 @@ private:
     theta0 = states_result.theta;
     theta_dot0 = states_result.theta_dot;
     theta_now = theta0;
-    // cout << "  = "<< endl;
-
-    // cout << "Theta_ddot = "<<states_result.theta_ddot<< endl;
-    // cout << "Theta_dot = "<<states_result.theta_dot<< endl;
-    // cout << "Theta = "<<states_result.theta<< endl;
-    // cout << "  = "<< endl;
-
     message.name = {"pendulum_joint"};
     message.position = {states_result.theta};
 

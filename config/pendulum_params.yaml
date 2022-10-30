@@ -18,7 +18,7 @@ pendulum_parameters:
 
     water_density: 1000.0           # kg/m3
 
-    pendulum_radius: 0.08           # m
+    pendulum_radius: 0.1           # m
 
     drag_coefficient: 1.0     
   
