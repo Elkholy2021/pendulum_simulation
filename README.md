@@ -9,7 +9,10 @@ A ros2 package for dynamic modeling of a simple pendulum fully immersed underwat
 ![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/forces.png)
 ## Dynamic modeling ##
 ![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/modeling.PNG)
+
 For more details about the modeling, kindly see [this report](https://github.com/Elkholy2021/pendulum_simulation/blob/main/modeling_details.pdf).
+
+
 
 ## ros2 program archeticutre ##
 ![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/architecture.png)
