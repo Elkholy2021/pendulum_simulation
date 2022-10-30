@@ -22,7 +22,7 @@ def generate_launch_description():
   default_rviz_config_path = os.path.join(pkg_share, 'rviz/rviz_settings.rviz')
 
   # Set the path to the URDF file
-  default_urdf_model_path = os.path.join(pkg_share, 'urdf/pendulum.urdf')
+  default_urdf_model_path = os.path.join(pkg_share, 'urdf/pendulum.urdf.xacro')
 
   # Launch configuration variables specific to simulation
   urdf_model = LaunchConfiguration('urdf_model')

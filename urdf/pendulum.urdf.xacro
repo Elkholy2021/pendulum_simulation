@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="pendulum">
+<!-- <xacro:property name="yaml_file" value="$(find package)/config/pendulum_params.yaml" />
+<xacro:property name="params" value="${load_yaml(yaml_file)}"/>
+<xacro:property name="radius" value="${params[Link1][val1]}" /> -->
+
+
+ <xacro:property name="radius" value="0.5" />
+
+
+<xacro:property name="length" value="5.0" />
+<xacro:property name="rod_radius" value="0.05" />
+
+
+
+    <joint name="pendulum_joint" type="continuous">
+      <origin xyz="0 0 0" rpy="0 1.57 0 "/>
+      <axis xyz="0 1 0"/>
+      <parent link="world"/>
+      <child link="pendulum_link"/>
+      <dynamics damping="0.01"/>
+      <limit effort="0" velocity="0"/>
+      <safety_controller k_velocity="0"/>
+    </joint>
+
+    <link name="world">
+      <inertial>
+        <mass value="0" />
+        <origin xyz="0.0 0.0 0" rpy="0 0 0" />
+        <inertia  ixx="0" ixy="0" ixz="0"
+                  iyy="0" iyz="0"
+                  izz="0" />
+      </inertial>
+    </link>
+
+    <link name="pendulum_link">
+      <inertial>
+        <mass value="0.05" />
+        <origin xyz="0.25 0 0" rpy="0 0 0" />
+        <inertia  ixx="0.001" ixy="0.0" ixz="0.0"
+                  iyy="0.001" iyz="0.0"
+                  izz="0.001" />
+      </inertial>
+      <visual>
+        <origin xyz="${length} 0 0" rpy="0 0 0" />
+        <geometry>
+          <sphere radius="${radius}"/>
+        </geometry>
+          <material name="Orange">
+    <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
+  </material>
+
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.25" rpy="0 0 0" />
+        <geometry>
+          <sphere radius="${radius}"/>
+        </geometry>
+      </collision>
+    </link>
+    
+    <joint name="pendulum_fixed_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="pendulum_link"/>
+      <child link="pendulum_rod_link"/>
+    </joint>
+
+    <link name="pendulum_rod_link">
+      <inertial>
+        <mass value="0.001" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia  ixx="0.001" ixy="0.0" ixz="0.0"
+                  iyy="0.001" iyz="0.0"
+                  izz="0.001" />
+      </inertial>
+      <visual>
+        <origin xyz="${length/2} 0 0" rpy="0 1.5708 0" />
+        <geometry>
+          <cylinder radius="${rod_radius}" length="${length}"/>
+        </geometry>
+          <material name="Dark blue">
+    <color rgba="${0/255} ${0/255} ${140/255} 1.0"/>
+  </material>
+
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.125" rpy="0 0 0" />
+        <geometry>
+          <cylinder radius="${rod_radius}" length="${length}"/>
+        </geometry>
+      </collision>
+    </link>
+</robot>
