@@ -1,6 +1,6 @@
 # Dynamic modeling of a simple pendulum underwater
 
-A ros2 package for dynamic modeling of a simple pendulum underwater with rviz visualization
+A ros2 package for dynamic modeling of a simple pendulum fully immersed underwater with rviz visualization
 
 
 ![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/pendulum.gif)
