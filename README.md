@@ -1,6 +1,6 @@
 # Dynamic modeling of a simple pendulum underwater
-A ros2 package for dynamic modeling of a simple pendulum underwater with rviz visualization
 
+A ros2 package for dynamic modeling of a simple pendulum underwater with rviz visualization
 # Installation #
 Before you install the package, make sure that you have the joint state publisher and xacro packeges installed on your ros2 system by typing the following:
 ```bash
@@ -22,8 +22,8 @@ Then, run this command:
 git clone https://github.com/Elkholy2021/Dynamic-modeling-of-a-simple-pendulum-undrerwater.git
 ```
 
-# Configuration #
-To modify the simulation parameters, kindly open the yaml file in config folder to modify them by running this command:
+# Static configuration #
+To modify the simulation parameters like mass, length, water current, drag, etc .. , kindly open the yaml file in config folder to modify them by running this command:
 ```bash
 gedit ~/<YOUR ROS2 WORKSPACE>/src/pendulum_simulation/config/pendulum_params.yaml
 ```
@@ -40,3 +40,9 @@ And then run the bash script ``` start_simulation.sh``` using this command:
 ./start_simulation.sh
 ```
 
+# Configuration on the fly #
+You can also change the water current vector directrly from the terminal without building the package everytime by running the ``` water_current_pub``` and parsing the water current vector components as ros arguments by typing this command as an example:
+```bash
+ros2 run pendulum_simulation water_current_pub --ros-args -p "x:= 4.1" -p "y:=0.0" -p "z:=-2.1"
+```
+If you did not provide the arguments, the node will publish the default values
