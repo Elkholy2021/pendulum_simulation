@@ -65,4 +65,4 @@ ros2 run pendulum_simulation water_current_pub --ros-args -p "x:= 4.1" -p "y:=0.
 ```
 If you did not provide the arguments, the node will publish the default values
 
-If you did not run the node '''water_current_pub''' or  the node got inturpted while running, the simulation parameters will be loaded from the yaml file. 
+If you did not run the node ''' water_current_pub ''' or  the node got inturpted while running, the simulation parameters will be loaded from the yaml file. 
