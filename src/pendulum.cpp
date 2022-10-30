@@ -48,13 +48,25 @@ public:
 
     publisher_ = this->create_publisher<sensor_msgs::msg::JointState>("joint_states", 10);
     subscriber_ = this->create_subscription<geometry_msgs::msg::Vector3>(
-      "water_current", 10, std::bind(&MinimalPublisher::topic_callback, this, _1));
+      "water_current", 10, std::bind(&MinimalPublisher::water_current_callback, this, _1));
 
     timer_ = this->create_wall_timer(
       50ms, std::bind(&MinimalPublisher::timer_callback, this));
   }
 
   bool first_time = true;
+  bool water_current_publishing = false;
+  double water_currentX;
+  double Vc_mag;
+  double Vc_eff;
+  double beta; //water current direction with respect to horizontal axis (x)
+  double theta_now;
+  double Vc_topic;
+  double Vc;
+  int counter_check_topic_pub = 0;
+  int counter_water_current_topic = 0;
+  int counter_water_current_yaml = 0;
+
   auto load_initial_conditions() {
     double theta0 = get_parameter("initial_angle").as_double();
     double theta_dot0 = get_parameter("initial_angular_speed").as_double();
@@ -67,16 +79,28 @@ public:
     return initial_conditions {theta0, theta_dot0};
 
   }
+  void water_current_callback(const geometry_msgs::msg::Vector3::SharedPtr msg) 
+    {
+      counter_check_topic_pub = 0;
+      water_current_publishing = true;
+      Vc_mag = sqrt(pow(msg->x,2)+pow(msg->z,2));
+      beta = atan2 (msg->z,msg->x); 
+      Vc_topic = Vc_mag * cos(beta) * cos(theta_now);
+      // cout << "beta: "<< beta<< endl;
+      // cout << "theta now: "<< theta_now<< endl;
+      // cout << "Vc_topic: "<< Vc_topic<< endl;
 
+    }
   auto pendulum( double theta, double theta_dot) {
-
+    counter_check_topic_pub += 1;
     double m = get_parameter("mass").as_double();
     double L = get_parameter("length").as_double();
     double g = get_parameter("gravity").as_double();
-    double Vc = get_parameter("water_speed").as_double();
     double pw = get_parameter("water_density").as_double();
     double r = get_parameter("pendulum_radius").as_double();
     double Kd = get_parameter("drag_coefficient").as_double();
+    // double Vc = get_parameter("water_speed").as_double();
+
     double theta_ddot;
     double tau_g;
     double tau_d;
@@ -86,6 +110,30 @@ public:
     double V = (4/3)*M_PI*pow(r,3);
     double Ap = M_PI*pow(r,2);
     // double uf = 0.2;
+    if (counter_check_topic_pub >  10){   //if water current topic was publishing and then got interuppted
+      water_current_publishing = false;
+    }
+
+    if (water_current_publishing){
+      Vc = Vc_topic;
+      counter_water_current_topic +=1;
+      if (counter_water_current_topic ==2 || counter_water_current_topic%100 == 0){
+        cout << "Vc from topic" << endl;
+        cout << "Vc: "<< Vc<<" m/s, Beta: "<< beta <<" rad" << endl;
+        counter_water_current_yaml = 0;
+      }
+    }
+
+    else{
+      Vc = get_parameter("water_speed").as_double();
+      counter_water_current_yaml +=1;
+      if (counter_water_current_yaml ==2){
+        cout << "Vc from yaml file"<<endl;
+        cout << "Vc: "<< Vc<<" m/s, Beta: "<< 0 <<" rad" << endl;
+        counter_water_current_topic = 0;
+      }
+
+    }
     
     if (first_time){
     cout<<"---------------------------------------"<<endl;
@@ -133,13 +181,7 @@ public:
 
 
 private:
-  void topic_callback(const geometry_msgs::msg::Vector3::SharedPtr msg) const
-    {
-      cout << "X: "<< msg->x << endl;
-      cout << "Y: "<< msg->y << endl;
-      cout << "Z: "<< msg->z << endl;
-
-    }
+  
   void timer_callback()
   {
 
@@ -161,6 +203,7 @@ private:
     auto states_result = pendulum(theta0,theta_dot0) ;
     theta0 = states_result.theta;
     theta_dot0 = states_result.theta_dot;
+    theta_now = theta0;
     // cout << "  = "<< endl;
 
     // cout << "Theta_ddot = "<<states_result.theta_ddot<< endl;
