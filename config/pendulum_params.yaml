@@ -4,7 +4,7 @@ pendulum_parameters:
   ros__parameters:
     mass: 3.0                       # kg
 
-    initial_angle: -3.0            # rad
+    initial_angle: -2.0            # rad
 
     initial_angular_speed: 0.0      # rad/s
 
