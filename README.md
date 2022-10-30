@@ -8,7 +8,7 @@ A ros2 package for dynamic modeling of a simple pendulum underwater with rviz vi
 # Forces diagram #
 ![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/forces.png)
 # Dynamic modeling#
-![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/modeling.png)
+![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/modeling.PNG)
 # ros2 program archeticutre#
 ![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/architecture.png)
 
