@@ -1,7 +1,19 @@
 # Dynamic modeling of a simple pendulum underwater
 
 A ros2 package for dynamic modeling of a simple pendulum underwater with rviz visualization
+
+
 ![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/pendulum.gif)
+
+# Forces diagram #
+![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/forces.png)
+# Dynamic modeling#
+![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/modeling.png)
+# ros2 program archeticutre#
+![](https://github.com/Elkholy2021/pendulum_simulation/blob/main/architecture.png)
+
+
+
 
 # Installation #
 Before you install the package, make sure that you have the joint state publisher and xacro packeges installed on your ros2 system by typing the following:
