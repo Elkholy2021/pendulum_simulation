@@ -38,7 +38,7 @@ cd ~/<YOUR ROS2 WORKSPACE>/src
 Then, run this command:
 
 ```bash
-git clone https://github.com/Elkholy2021/Dynamic-modeling-of-a-simple-pendulum-undrerwater.git
+git clone https://github.com/Elkholy2021/pendulum_simulation.git
 ```
 
 ## Static configuration ##
